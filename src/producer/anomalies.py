@@ -1,9 +1,16 @@
 import random
 
 
-def should_generate_anomaly(probability: float = 0.05) -> bool:
-    """
-    Generate an anomaly with the given probability.
-    Default: 5%.
-    """
-    return random.random() < probability
+ANOMALY_TYPES = [
+    "overheating",
+    "cpu_overload",
+    "cooling_failure",
+    "power_anomaly",
+]
+
+
+def generate_anomaly_type(probability: float = 0.05) -> str | None:
+    if random.random() >= probability:
+        return None
+
+    return random.choice(ANOMALY_TYPES)

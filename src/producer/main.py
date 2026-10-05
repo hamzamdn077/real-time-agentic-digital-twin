@@ -2,7 +2,7 @@ import json
 import time
 
 from producer.telemetry import generate_telemetry
-from producer.anomalies import should_generate_anomaly
+from producer.anomalies import generate_anomaly_type
 
 
 SERVERS = [
@@ -15,16 +15,14 @@ SERVERS = [
 
 
 def main():
-
     while True:
-
         for server_id in SERVERS:
 
-            anomaly = should_generate_anomaly()
+            anomaly_type = generate_anomaly_type()
 
             event = generate_telemetry(
                 server_id=server_id,
-                anomaly=anomaly,
+                anomaly_type=anomaly_type,
             )
 
             print(json.dumps(event))
